@@ -4,6 +4,7 @@
 
 The new version of st-link v2 from GitHub at this **[page](https://github.com/texane/stlink)**. Run the following code in its root folder.
 
+	$ sudo apt-get install libusb-1.0.0-dev
 	$ unzip stlink-master.zip
     $ cd stlink-master/
 	$ make release

@@ -2,3 +2,4 @@
 
 stlink-master/build/
 stm32flash/*.o
+.appveyor.yml
