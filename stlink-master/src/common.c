@@ -1778,7 +1778,7 @@ int stm32l1_write_half_pages(stlink_t *sl, stm32_addr_t addr, uint8_t* base, uin
         if (sl->verbose >= 1) {
             /* show progress. writing procedure is slow
                and previous errors are misleading */
-            fprintf(stdout, "\r%3u/%u halfpages written", count + 1, num_half_pages);
+            fprintf(stdout, "%3u/%u halfpages written\n", count + 1, num_half_pages);
             fflush(stdout);
         }
         do {
@@ -1832,7 +1832,7 @@ int stlink_write_flash(stlink_t *sl, stm32_addr_t addr, uint8_t* base, uint32_t 
             ELOG("Failed to erase_flash_page(%#zx) == -1\n", addr + off);
             return -1;
         }
-        fprintf(stdout,"\rFlash page at addr: 0x%08lx erased",
+        fprintf(stdout,"Flash page at addr: 0x%08lx erased\n",
                 (unsigned long)(addr + off));
         fflush(stdout);
         page_count++;
@@ -1966,7 +1966,7 @@ int stlink_write_flash(stlink_t *sl, stm32_addr_t addr, uint8_t* base, uint32_t 
                 fprintf(stdout, "\r");
 
             if ((off % sl->flash_pgsz) > (sl->flash_pgsz -5)) {
-                fprintf(stdout, "\r%3u/%3u pages written",
+                fprintf(stdout, "%3u/%3u pages written\n",
                         (unsigned int)(off/sl->flash_pgsz),
 			(unsigned int)(len/sl->flash_pgsz));
                 fflush(stdout);
@@ -2016,7 +2016,7 @@ int stlink_write_flash(stlink_t *sl, stm32_addr_t addr, uint8_t* base, uint32_t 
             if (sl->verbose >= 1) {
                 /* show progress. writing procedure is slow
                    and previous errors are misleading */
-                fprintf(stdout, "\r%3u/%lu pages written", ++write_block_count, (unsigned long)((len+sl->flash_pgsz-1)/sl->flash_pgsz));
+                fprintf(stdout, "%3u/%lu pages written\n", ++write_block_count, (unsigned long)((len+sl->flash_pgsz-1)/sl->flash_pgsz));
                 fflush(stdout);
             }
         }
