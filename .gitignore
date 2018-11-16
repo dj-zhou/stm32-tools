@@ -3,3 +3,7 @@
 stlink-master/build/
 stm32flash/*.o
 .appveyor.yml
+st-flash
+st-info
+st-util
+*.zip
