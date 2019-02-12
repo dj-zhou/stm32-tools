@@ -954,7 +954,7 @@ static stlink_t* stlink_open(const int verbose) {
         return NULL;
     }
 
-    libusb_set_debug(slsg->libusb_ctx, 3);
+    libusb_set_option(slsg->libusb_ctx, 3);
 
     slsg->usb_handle = libusb_open_device_with_vid_pid(slsg->libusb_ctx, STLINK_USB_VID_ST, STLINK_USB_PID_STLINK);
     if (slsg->usb_handle == NULL) {
