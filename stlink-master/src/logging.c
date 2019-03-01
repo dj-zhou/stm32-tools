@@ -22,6 +22,10 @@ int ugly_log(int level, const char *tag, const char *format, ...) {
     if (level > max_level) {
         return 0;
     }
+
+    // Flush to maintain order of streams
+    fflush(stdout);
+
     va_list args;
     va_start(args, format);
     time_t mytt = time(NULL);
@@ -41,17 +45,12 @@ int ugly_log(int level, const char *tag, const char *format, ...) {
     case UERROR:
         fprintf(stderr, "ERROR %s: ", tag);
         break;
-    case UFATAL:
-        fprintf(stderr, "FATAL %s: ", tag);
-        vfprintf(stderr, format, args);
-        exit(EXIT_FAILURE);
-        // NEVER GETS HERE!!!
-        break;
     default:
         fprintf(stderr, "%d %s: ", level, tag);
         break;
     }
     vfprintf(stderr, format, args);
+    fflush(stderr);
     va_end(args);
     return 1;
 }

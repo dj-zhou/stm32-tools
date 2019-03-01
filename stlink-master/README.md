@@ -3,7 +3,7 @@ Open source version of the STMicroelectronics Stlink Tools
 
 [![GitHub release](https://img.shields.io/github/release/texane/stlink.svg)](https://github.com/texane/stlink/releases/latest)
 [![BSD licensed](https://img.shields.io/badge/license-BSD-blue.svg)](https://raw.githubusercontent.com/hyperium/hyper/master/LICENSE)
-[![GitHub commits](https://img.shields.io/github/commits-since/texane/stlink/1.3.1.svg)](https://github.com/texane/stlink/compare/1.3.1...master)
+[![GitHub commits](https://img.shields.io/github/commits-since/texane/stlink/1.5.1.svg)](https://github.com/texane/stlink/compare/1.5.1...master)
 [![Downloads](https://img.shields.io/github/downloads/texane/stlink/total.svg)](https://github.com/texane/stlink/releases)
 [![Linux Status](https://img.shields.io/travis/texane/stlink/master.svg?label=linux)](https://travis-ci.org/texane/stlink)
 [![Build Status](https://jenkins.ncrmnt.org/buildStatus/icon?job=GithubCI/stlink)](https://jenkins.ncrmnt.org/job/GithubCI/job/stlink/)
@@ -34,6 +34,12 @@ For Debian Linux based distributions there is no package available
 Arch Linux users can install from the [repository](https://www.archlinux.org/packages/community/x86_64/stlink)
 
 Alpine Linux users can install from the [repository](https://pkgs.alpinelinux.org/packages?name=stlink)
+
+Fedora users can install from [repository](https://src.fedoraproject.org/rpms/stlink)
+
+RedHat/CentOS 7 users can install from EPEL [repository](https://src.fedoraproject.org/rpms/stlink/branch/epel7)
+
+Gentoo Linux users can install from the official portage [repository](https://packages.gentoo.org/packages/dev-embedded/stlink)
 
 FreeBSD users can install from [freshports](https://www.freshports.org/devel/stlink)
 
@@ -146,9 +152,9 @@ enough unused registers. In my experience, -O3 causes that frequently.
 
 Q: At some point I use GDB command `next', and it hangs.
 
-A: Sometimes when you will try to use GDB `next' command to skip a loop,
+A: Sometimes when you will try to use GDB `next` command to skip a loop,
 it will use a rather inefficient single-stepping way of doing that.
-Set up a breakpoint manually in that case and do `continue'.
+Set up a breakpoint manually in that case and do `continue`.
 
 Q: Load command does not work in GDB.
 
@@ -226,5 +232,5 @@ Issue related to this bug: [#545](https://github.com/texane/stlink/issues/545)
 
 ## License
 
-The stlink library and tools are licensed under the [BSD license](LICENSE). With
-some exceptions on external components (e.g flashloaders).
+The stlink library and tools are licensed under the [BSD license](LICENSE).
+The flashloaders/stm32l0x.s and flashloaders/stm32lx.s source files are licensed under the GPL-2+.

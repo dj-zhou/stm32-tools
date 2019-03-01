@@ -9,7 +9,7 @@ include_directories(SYSTEM ${gtk_INCLUDE_DIRS})
 
 add_executable(stlink-gui-local ${GUI_SOURCES})
 set_target_properties(stlink-gui-local PROPERTIES
-                      COMPILE_DEFINITIONS STLINK_UI_DIR="${CMAKE_CURRENT_SOURCE_DIR}/gui")
+                      COMPILE_DEFINITIONS STLINK_UI_DIR="${CMAKE_CURRENT_SOURCE_DIR}")
 target_link_libraries(stlink-gui-local ${STLINK_LIB_STATIC} ${gtk_LDFLAGS})
 
 
@@ -22,3 +22,12 @@ install(TARGETS stlink-gui
         RUNTIME DESTINATION bin)
 install(FILES stlink-gui.ui
         DESTINATION ${INSTALLED_UI_DIR})
+if (${CMAKE_SYSTEM_NAME} MATCHES "Linux")
+    # Install desktop entry
+    install(FILES stlink-gui.desktop 
+            DESTINATION share/applications)
+    # Install icon
+    install(FILES art/stlink-gui.svg 
+            DESTINATION share/icons/hicolor/scalable/apps)
+endif (${CMAKE_SYSTEM_NAME} MATCHES "Linux")
+

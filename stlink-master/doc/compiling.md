@@ -43,7 +43,7 @@ $ cd build/Release; sudo make install
 * Debian based distros (debian, ubuntu)
   * `build-essential`
 * `cmake`
-* `libusb-1.0` (plus development headers for building, on debian based distros `libusb-1.0.0-dev` package)
+* `libusb-1.0` (plus development headers for building, on debian based distros `libusb-1.0-0-dev` package)
 * (optional) for `stlink-gui` we need libgtk-3-dev
 
 ### Fixing cannot open shared object file
@@ -116,6 +116,15 @@ during installation you can use the following cmake options:
 ```
 $ cmake -DSTLINK_UDEV_RULES_DIR="/usr/lib/udev/rules.d" \
         -DSTLINK_MODPROBED_DIR="/usr/lib/modprobe.d" ..
+```
+
+## Build using different directory for shared libs
+
+To put the compiled shared libs into a different directory during installation
+you can use the following cmake option:
+
+```
+$ cmake -DLIB_INSTALL_DIR:PATH="/usr/lib64"  ..
 ```
 
 ## Windows (MinGW64) 

@@ -1,13 +1,66 @@
 Stlink ChangeLog
 ================
 
-v1.3.2
+v1.5.1
 ======
 
-Release date: ongoing
+Release date: 2018-09-13
+
+Major changes and added features:
+
+* Implement intel hex support for GTK GUI
+* Update libusb to 1.0.22
+* Add memory map for STM32F411RE target
+* Add support for STM32L4R9 target
+
+Fixes:
+
+* FreeBSD define LIBUSB_API_VERSION instead of LIBUSBX_API_VERSION
+* Proper flash page size calculation for F412 target
+* Fix flash memory map for F72xxx target
+* Return correct value on EOF for Semihosting SYS_READ
+
+For a complete list of changes see [the milestone](https://github.com/texane/stlink/milestone/6?closed=1)
+
+v1.5.0
+======
+
+Release date: 2018-02-16
+
+Major changes and added features:
+
+* STM32F72xx73xx support ([#1969148](https://github.com/texane/stlink/commit/19691485359afef1a256964afcbb8dcf4b733209))
+* Add support of STM32L496xx/4A6xx devices ([#615](https://github.com/texane/stlink/pull/615))
+
+Fixes:
+
+* Fix memory map for stm32l496xx boards ([#639](https://github.com/texane/stlink/pull/639))
+* Fix write for microcontroler with RAM size less or equal to 32K ([#637](https://github.com/texane/stlink/pull/637))
+* Added LIB_INSTALL_DIR to correct libs install on 64-bit systems ([#636](https://github.com/texane/stlink/pull/636))
+* Fix verification of flash error for STM32L496x device ([#618](https://github.com/texane/stlink/pull/618))
+* Fix build on Fedora with GCC 8 ([#666](https://github.com/texane/stlink/pull/668))
+
+v1.4.0
+======
+
+Release date: 2017-07-01
+
+Major changes and added features:
+
+* Add support for STM32L452 target ([#608](https://github.com/texane/stlink/pull/608))
+* Initial support to compile with Microsoft Visual Studio 2017 ([#602](https://github.com/texane/stlink/pull/602))
+* Added support for flashing second bank on STM32F10x_XL ([#592](https://github.com/texane/stlink/pull/592))
+* Add support for STM32L011 target ([#572](https://github.com/texane/stlink/pull/572)) 
+* Allow building of debian package with CPack (@xor-gate)
 
 Updates and fixes:
 
+* Fix compilation with GCC 7 ([#590](https://github.com/texane/stlink/pull/590))
+* Skip GTK detection if we're cross-compiling ([#588](https://github.com/texane/stlink/pull/588))
+* Fix possible memory leak ([#570](https://github.com/texane/stlink/pull/570))
+* Fix building with mingw64 ([#569](https://github.com/texane/stlink/pull/569), [#610](https://github.com/texane/stlink/pull/610))
+* Update libusb to 1.0.21 for Windows ([#562](https://github.com/texane/stlink/pull/562))
+* Fixing low-voltage flashing on STM32F7 parts. ([#567](https://github.com/texane/stlink/pull/567))
 * Update libusb to 1.0.21 for Windows ([#562](https://github.com/texane/stlink/pull/562))
 
 v1.3.1
