@@ -1,6 +1,8 @@
 #ifndef STLINK_CHIPID_H_
 #define STLINK_CHIPID_H_
 
+#include <stdint.h>
+
 #ifdef __cplusplus
 extern "C" {
 #endif
