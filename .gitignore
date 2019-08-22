@@ -7,3 +7,6 @@ st-flash
 st-info
 st-util
 *.zip
+*.o
+*.a
+stm32flash
