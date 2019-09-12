@@ -198,7 +198,7 @@ int main(int argc, char* argv[]) {
 	parser_err_t perr;
 	FILE *diag = stdout;
 
-	fprintf(diag, "stm32flash " VERSION "\n\n");
+	fprintf(diag, "stm32flash " VERSION " | ");
 	fprintf(diag, "http://stm32flash.sourceforge.net/\n\n");
 	if (parse_options(argc, argv) != 0)
 		goto close;
@@ -243,7 +243,7 @@ int main(int argc, char* argv[]) {
 			}
 		}
 
-		fprintf(diag, "Using Parser : %s\n", parser->name);
+		fprintf(diag, "Using Parser          : %s\n", parser->name);
 	} else {
 		parser = &PARSER_BINARY;
 		p_st = parser->init();
@@ -265,16 +265,16 @@ int main(int argc, char* argv[]) {
 	if (!stm)
 		goto close;
 
-	fprintf(diag, "Version      : 0x%02x\n", stm->bl_version);
+	fprintf(diag, "Version               : 0x%02x\n", stm->bl_version);
 	if (port->flags & PORT_GVR_ETX) {
-		fprintf(diag, "Option 1     : 0x%02x\n", stm->option1);
-		fprintf(diag, "Option 2     : 0x%02x\n", stm->option2);
+		fprintf(diag, "Option 1              : 0x%02x\n", stm->option1);
+		fprintf(diag, "Option 2              : 0x%02x\n", stm->option2);
 	}
-	fprintf(diag, "Device ID    : 0x%04x (%s)\n", stm->pid, stm->dev->name);
-	fprintf(diag, "- RAM        : %dKiB  (%db reserved by bootloader)\n", (stm->dev->ram_end - 0x20000000) / 1024, stm->dev->ram_start - 0x20000000);
-	fprintf(diag, "- Flash      : %dKiB (size first sector: %dx%d)\n", (stm->dev->fl_end - stm->dev->fl_start ) / 1024, stm->dev->fl_pps, stm->dev->fl_ps[0]);
-	fprintf(diag, "- Option RAM : %db\n", stm->dev->opt_end - stm->dev->opt_start + 1);
-	fprintf(diag, "- System RAM : %dKiB\n", (stm->dev->mem_end - stm->dev->mem_start) / 1024);
+	fprintf(diag, "Device ID             : 0x%04x (%s)\n", stm->pid, stm->dev->name);
+	fprintf(diag, "RAM                   : %dKiB  (%db reserved by bootloader)\n", (stm->dev->ram_end - 0x20000000) / 1024, stm->dev->ram_start - 0x20000000);
+	fprintf(diag, "Flash                 : %dKiB (size first sector: %dx%d)\n", (stm->dev->fl_end - stm->dev->fl_start ) / 1024, stm->dev->fl_pps, stm->dev->fl_ps[0]);
+	fprintf(diag, "Option RAM            : %db\n", stm->dev->opt_end - stm->dev->opt_start + 1);
+	fprintf(diag, "System RAM            : %dKiB\n\n", (stm->dev->mem_end - stm->dev->mem_start) / 1024);
 
 	uint8_t		buffer[256];
 	uint32_t	addr, start, end;
@@ -392,7 +392,7 @@ int main(int argc, char* argv[]) {
 		fprintf(stdout,	"Done.\n");
 	} else if (action == ACT_ERASE_ONLY) {
 		ret = 0;
-		fprintf(stdout, "Erasing flash\n");
+		fprintf(stdout, "Erase flash\n");
 
 		if (num_pages != STM32_MASS_ERASE &&
 		    (start != flash_page_to_addr(first_page)
@@ -416,7 +416,7 @@ int main(int argc, char* argv[]) {
 		fprintf(diag,	"Done.\n");
 
 	} else if (action == ACT_WRITE) {
-		fprintf(diag, "Write to memory\n");
+		fprintf(diag, "- Write to memory ...\n");
 
 		off_t 	offset = 0;
 		ssize_t r;
@@ -445,7 +445,7 @@ int main(int argc, char* argv[]) {
 		// TODO: If writes are not page aligned, we should probably read out existing flash
 		//       contents first, so it can be preserved and combined with new data
 		if (!no_erase && num_pages) {
-			fprintf(diag, "Erasing memory\n");
+			fprintf(diag, "- Erase memory ...\n");
 			s_err = stm32_erase_memory(stm, first_page, num_pages);
 			if (s_err != STM32_ERR_OK) {
 				fprintf(stderr, "Failed to erase memory\n");
@@ -516,7 +516,7 @@ int main(int argc, char* argv[]) {
 			offset	+= len;
 
 			fprintf(diag,
-				"\rWrote %saddress 0x%08x (%.2f%%) ",
+				"\r- Wrote %saddress 0x%08x (%.2f%%) ",
 				verify ? "and verified " : "",
 				addr,
 				(100.0f / size) * offset
@@ -550,21 +550,21 @@ close:
 		if (execute == 0)
 			execute = stm->dev->fl_start;
 
-		fprintf(diag, "\nStarting execution at address 0x%08x... ", execute);
+		fprintf(diag, "- Start to execution at address 0x%08x... ", execute);
 		fflush(diag);
 		if (stm32_go(stm, execute) == STM32_ERR_OK) {
 			reset_flag = 0;
-			fprintf(diag, "done.\n");
+			fprintf(diag, "Done.\n");
 		} else
-			fprintf(diag, "failed.\n");
+			fprintf(diag, "Failed.\n");
 	}
 
 	if (stm && reset_flag) {
-		fprintf(diag, "\nResetting device... ");
+		fprintf(diag, "\n- Reset device... ");
 		fflush(diag);
 		if (init_bl_exit(stm, port, gpio_seq))
-			fprintf(diag, "done.\n");
-		else	fprintf(diag, "failed.\n");
+			fprintf(diag, "Done.\n");
+		else	fprintf(diag, "Failed.\n");
 	}
 
 	if (p_st  ) parser->close(p_st);
