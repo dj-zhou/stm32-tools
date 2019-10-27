@@ -1,4 +1,4 @@
-# STM32F4  Development, Tools
+# STM32F4  Development Tools
 
 ## 1. st-link v2
 
