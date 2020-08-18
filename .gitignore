@@ -1,6 +1,6 @@
 # Add any directories, files, or patterns you don't want to be tracked by version control
 
-stlink-master/build/
+build/
 stm32flash/*.o
 .appveyor.yml
 st-flash
